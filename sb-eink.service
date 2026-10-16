@@ -8,6 +8,7 @@ Type=simple
 User=pi
 SupplementaryGroups=gpio spi
 Environment=PYTHONPATH=/opt/e-Paper/RaspberryPi_JetsonNano/python/lib
+Environment=GPIOZERO_PIN_FACTORY=lgpio
 ExecStart=/usr/bin/python3 /opt/sb-eink/sb_eink.py --config /etc/sb-eink.toml
 StateDirectory=sb-eink
 Restart=on-failure
