@@ -1,0 +1,36 @@
+# Copy to /etc/sb-eink.toml, then: chmod 600 /etc/sb-eink.toml (it holds a secret)
+# Env overrides: SB_EINK_URL, SB_EINK_TOKEN, SB_EINK_USERNAME, SB_EINK_PASSWORD
+
+base_url = "http://hivemind.local:5000"   # https:// is supported (TLS verified by default)
+page = "external/quest.md"
+tag = ""                            # "" = every unchecked task
+
+# Auth: use ONE of these. Leave both empty if the server has no auth.
+token = ""                               # server SB_AUTH_TOKEN -> Authorization: Bearer
+username = "dnorris"                            # cookie login via POST /.auth
+password = "%17v3r*u7737?"
+
+poll_interval = 300                      # seconds
+retry_interval = 60                      # seconds, while offline
+timeout = 15
+verify_tls = true
+ca_file = ""                             # optional CA bundle for self-signed certs
+
+# Not verified against a live server; change only if your setup differs.
+fs_prefix = "/.fs"
+send_sync_mode = true
+use_if_match = true
+
+# Required. Printed on the back of the HAT: V2, V3, V4 or b_V4 (tri-color).
+epd_revision = "V4"
+full_refresh_every = 20                  # full refresh every N updates (ghosting)
+rotate180 = false
+font_path = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
+
+# BCM numbers, buttons wired pin -> GND (internal pull-ups).
+pin_next = 5
+pin_prev = 6
+pin_done = 13
+debounce = 0.05
+
+cache_file = "/var/lib/sb-eink/cache.json"
