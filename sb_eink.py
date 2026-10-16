@@ -80,6 +80,8 @@ class TaskAmbiguous(SBError):
 # ---------------------------------------------------------------- parse / toggle
 
 TASK_RE = re.compile(r"^\s*[-*] \[( |x)\] (.*)$")
+LEADING_REF_RE = re.compile(r"^\s*\[\[[^\]]*\]\]:?\s*")
+CHARS_PER_LINE = 30
 
 
 @dataclass(frozen=True)
@@ -112,6 +114,7 @@ def parse_tasks(page, tag=""):
         if tre and not tre.search(text):
             continue
         shown = " ".join((tre.sub("", text) if tre else text).split())
+        shown = LEADING_REF_RE.sub("", shown)
         tasks.append(Task(text, shown or text))
     return tasks
 
@@ -394,7 +397,10 @@ def wrap(text, font, width):
 
 
 def fit(text, font_path, width, height):
-    for size in range(40, 9, -2):
+    top = 9
+    while top < 40 and load_font(font_path, top + 1).getlength("n" * CHARS_PER_LINE) <= width:
+        top += 1
+    for size in range(top, 8, -1):
         font = load_font(font_path, size)
         lines = wrap(text, font, width)
         lh = int(size * 1.2)
