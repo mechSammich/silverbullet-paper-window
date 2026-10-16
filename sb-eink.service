@@ -5,12 +5,13 @@ After=network-online.target
 
 [Service]
 Type=simple
-User=pi
+User=dnorris
 SupplementaryGroups=gpio spi
 Environment=PYTHONPATH=/opt/e-Paper/RaspberryPi_JetsonNano/python/lib
 Environment=GPIOZERO_PIN_FACTORY=lgpio
 ExecStart=/usr/bin/python3 /opt/sb-eink/sb_eink.py --config /etc/sb-eink.toml
 StateDirectory=sb-eink
+WorkingDirectory=/var/lib/sb-eink
 Restart=on-failure
 RestartSec=10
 
