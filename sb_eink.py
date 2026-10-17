@@ -81,7 +81,8 @@ class TaskAmbiguous(SBError):
 
 TASK_RE = re.compile(r"^\s*[-*] \[( |x)\] (.*)$")
 LEADING_REF_RE = re.compile(r"^\s*\[\[[^\]]*\]\]:?\s*")
-CHARS_PER_LINE = 30
+CHARS_PER_LINE = 24
+HEADER_H = 16
 
 
 @dataclass(frozen=True)
@@ -420,14 +421,15 @@ def render(cfg, task, idx, total, offline, notice):
     fp = cfg["font_path"]
     small = load_font(fp, 12)
     d.line([(0, H - FOOTER_H), (W, H - FOOTER_H)], fill=0)
+    d.text((4, 1), "random quest", font=small, fill=0)
     left = " ".join(s for s in ("OFFLINE" if offline else "", notice) if s)
     right = "%d/%d" % (idx + 1, total) if total else ""
     d.text((W - 4 - d.textlength(right, font=small), H - FOOTER_H + 1), right, font=small, fill=0)
     d.text((4, H - FOOTER_H + 1), left, font=small, fill=0)  # may overlap the right text if long
 
     body = task.display if task else (notice or "No tasks")
-    font, lines, lh = fit(body, fp, W - 8, H - FOOTER_H - 6)
-    y = (H - FOOTER_H - len(lines) * lh) // 2
+    font, lines, lh = fit(body, fp, W - 8, H - FOOTER_H - HEADER_H - 6)
+    y = HEADER_H + (H - FOOTER_H - HEADER_H - len(lines) * lh) // 2
     for line in lines:
         d.text((4, y), line, font=font, fill=0)
         y += lh
