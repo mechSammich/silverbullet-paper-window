@@ -166,6 +166,10 @@ DEFAULTS = {
     "pin_next": 5,
     "pin_prev": 6,
     "pin_done": 13,
+    "pin_next_page": 22,
+    "pin_prev_page": 23,
+    "pin_set": 26,
+    "pin_reset": 27,
     "debounce": 0.05,
     "cache_file": os.path.join(os.path.expanduser("~"), ".cache", "sb-eink", "cache.json"),
 }
