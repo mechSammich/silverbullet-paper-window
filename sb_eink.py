@@ -163,13 +163,13 @@ DEFAULTS = {
     "full_refresh_every": 20,
     "rotate180": False,
     "font_path": "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf",
-    "pin_next": 5,
-    "pin_prev": 6,
-    "pin_done": 13,
-    "pin_next_page": 22,
-    "pin_prev_page": 23,
-    "pin_set": 26,
-    "pin_reset": 27,
+    "pin_next": 5,  # BCM GPIO 5 -> J8 pin 29
+    "pin_prev": 6,  # BCM GPIO 6 -> J8 pin 31
+    "pin_done": 13,  # BCM GPIO 13 -> J8 pin 33
+    "pin_next_page": 16,  # BCM GPIO 16 -> J8 pin 36
+    "pin_prev_page": 20,  # BCM GPIO 20 -> J8 pin 38
+    "pin_set": 26,  # BCM GPIO 26 -> J8 pin 37
+    "pin_reset": 27,  # BCM GPIO 27 -> J8 pin 13
     "debounce": 0.05,
     "cache_file": os.path.join(os.path.expanduser("~"), ".cache", "sb-eink", "cache.json"),
 }
